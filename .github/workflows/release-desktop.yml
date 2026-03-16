@@ -8,12 +8,13 @@ name: Release desktop
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
+
+permissions:
+  contents: write
 
 jobs:
   release:
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -23,9 +24,9 @@ jobs:
           - platform: macos-latest
             args: --target x86_64-apple-darwin
           - platform: ubuntu-22.04
-            args: ''
+            args: ""
           - platform: windows-latest
-            args: ''
+            args: ""
 
     runs-on: ${{ matrix.platform }}
 
@@ -47,8 +48,8 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'pnpm'
+          node-version: "22"
+          cache: "pnpm"
 
       - name: Configurar Rust
         uses: dtolnay/rust-toolchain@stable
@@ -58,7 +59,7 @@ jobs:
       - name: Cache Rust
         uses: swatinem/rust-cache@v2
         with:
-          workspaces: 'src-tauri'
+          workspaces: "src-tauri"
 
       - name: Instalar dependências do frontend
         run: pnpm install
@@ -72,10 +73,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ github.ref_name }}
-          releaseName: 'Duck Migration ${{ github.ref_name }}'
+          releaseName: "Duck Migration ${{ github.ref_name }}"
           releaseBody: |
             Builds para Windows, macOS (Intel e Apple Silicon) e Linux.
             Veja os assets abaixo para baixar e instalar.
-          releaseDraft: true
-          prerelease: ${{ contains(github.ref_name, '-') }}
+          releaseDraft: false
+          prerelease: false
           args: ${{ matrix.args }}
