@@ -3,8 +3,8 @@
 // Contexto e hook para idioma da interface
 // =====================================================
 
-import React, { createContext, useContext, useMemo, useState } from 'react';
-import type { ReactNode } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import type { SupportedLanguage, TranslationKey } from '@/lib/i18n';
 import { translate } from '@/lib/i18n';
 import { loadLanguage, saveLanguage } from '@/lib/i18nStorage';
@@ -21,7 +21,7 @@ interface LanguageProviderProps {
   children: ReactNode;
 }
 
-export function LanguageProvider({ children }: LanguageProviderProps): JSX.Element {
+export function LanguageProvider({ children }: LanguageProviderProps): ReactElement {
   const [language, setLanguageState] = useState<SupportedLanguage>(() => loadLanguage());
 
   const setLanguage = (next: SupportedLanguage): void => {

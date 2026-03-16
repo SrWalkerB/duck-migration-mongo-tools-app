@@ -3,11 +3,12 @@
 // Tela de configurações (idioma da interface)
 // =====================================================
 
+import type { ReactElement } from 'react';
 import { Select } from '@/components/ui/Select';
 import { useLanguage } from '@/hooks/useLanguage';
 import { SUPPORTED_LANGUAGES } from '@/lib/i18n';
 
-export function SettingsPage(): JSX.Element {
+export function SettingsPage(): ReactElement {
   const { language, setLanguage, t } = useLanguage();
 
   const options = SUPPORTED_LANGUAGES.map((lang) => ({
