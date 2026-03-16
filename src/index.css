@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* =====================================================
+   Duck Migration - Design System
+   Tema escuro inspirado no estilo do MongoDB Compass
+   ===================================================== */
+
+@theme {
+  /* Cores base */
+  --color-background: #0f1117;
+  --color-foreground: #e4e4e7;
+  --color-card: #18181b;
+  --color-card-foreground: #e4e4e7;
+  --color-popover: #18181b;
+  --color-popover-foreground: #e4e4e7;
+
+  /* Cor primaria (verde-esmeralda inspirado no MongoDB) */
+  --color-primary: #10b981;
+  --color-primary-foreground: #022c22;
+
+  /* Secundaria */
+  --color-secondary: #27272a;
+  --color-secondary-foreground: #e4e4e7;
+
+  /* Muted */
+  --color-muted: #27272a;
+  --color-muted-foreground: #a1a1aa;
+
+  /* Accent */
+  --color-accent: #1e3a2f;
+  --color-accent-foreground: #10b981;
+
+  /* Destructive */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fef2f2;
+
+  /* Borders */
+  --color-border: #2e2e33;
+  --color-input: #2e2e33;
+  --color-ring: #10b981;
+
+  /* Warning */
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #78350f;
+
+  /* Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+/* Reset e base */
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Scrollbar customizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-foreground);
+}
