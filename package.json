@@ -6,11 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:win": "tauri build --target x86_64-pc-windows-msvc",
-    "build:macos": "tauri build --target aarch64-apple-darwin",
-    "build:macos:x64": "tauri build --target x86_64-apple-darwin",
-    "build:macos:arm": "tauri build --target aarch64-apple-darwin",
-    "build:linux": "tauri build --target x86_64-unknown-linux-gnu",
+    "build:linux": "tauri build --bundles deb,rpm,appimage",
+    "build:windows": "tauri build --bundles msi,nsis",
+    "build:mac": "tauri build --bundles dmg",
     "lint": "eslint .",
     "preview": "vite preview",
     "tauri": "tauri"
