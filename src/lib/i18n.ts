@@ -39,6 +39,7 @@ const messages = {
     'connections.cancel': 'Cancel',
     'connections.testFailedFallback': 'Test failed',
     'connections.createdAt': 'Created',
+    'connections.searchPlaceholder': 'Search connections...',
 
     // Connection form
     'connectionForm.newTitle': 'New Connection',
@@ -124,6 +125,7 @@ const messages = {
     'connections.cancel': 'Cancelar',
     'connections.testFailedFallback': 'Falha ao testar',
     'connections.createdAt': 'Criada',
+    'connections.searchPlaceholder': 'Buscar conexões...',
 
     'connectionForm.newTitle': 'Nova conexão',
     'connectionForm.editTitle': 'Editar conexão',
@@ -206,6 +208,7 @@ const messages = {
     'connections.cancel': 'Cancelar',
     'connections.testFailedFallback': 'Error al probar',
     'connections.createdAt': 'Creada',
+    'connections.searchPlaceholder': 'Buscar conexiones...',
 
     'connectionForm.newTitle': 'Nueva conexión',
     'connectionForm.editTitle': 'Editar conexión',

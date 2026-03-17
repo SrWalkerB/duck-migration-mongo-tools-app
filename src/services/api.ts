@@ -33,9 +33,19 @@ function getErrorMessage(error: unknown, status: number): string {
 }
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
+  const hasBody =
+    options !== undefined &&
+    'body' in options &&
+    options.body !== undefined &&
+    options.body !== null;
+
+  const headers: HeadersInit = hasBody
+    ? { 'Content-Type': 'application/json', ...(options?.headers ?? {}) }
+    : options?.headers ?? {};
+
   const response = await fetch(`${BASE_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
     ...options,
+    headers,
   });
 
   if (!response.ok) {

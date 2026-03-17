@@ -54,6 +54,7 @@ export function ConnectionList() {
   const [testResults, setTestResults] = useState<
     Record<string, ConnectionTestResult>
   >({});
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleAdd = async (name: string, connectionString: string) => {
     await addConnection(name, connectionString);
@@ -100,6 +101,15 @@ export function ConnectionList() {
     }
   };
 
+  const filteredConnections = connections.filter((conn) => {
+    if (!searchQuery.trim()) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      conn.name.toLowerCase().includes(query) ||
+      conn.connectionString.toLowerCase().includes(query)
+    );
+  });
+
   // Loading state
   if (loading) {
     return (
@@ -117,19 +127,33 @@ export function ConnectionList() {
   return (
     <div className="mx-auto max-w-4xl p-8">
       {/* Header */}
-      <div className="mb-8 flex items-center justify-between">
-        <div>
+      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="space-y-1">
           <h1 className="text-2xl font-bold text-foreground">
             {t('connections.title')}
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground">
             {t('connections.subtitle')}
           </p>
         </div>
-        <Button onClick={() => setFormOpen(true)}>
-          <Plus className="h-4 w-4" />
-          {t('connections.add')}
-        </Button>
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+          <div className="relative w-full sm:min-w-[220px]">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder={t('connections.searchPlaceholder')}
+              className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+            />
+          </div>
+          <Button
+            onClick={() => setFormOpen(true)}
+            className="whitespace-nowrap px-5"
+          >
+            <Plus className="h-4 w-4" />
+            {t('connections.add')}
+          </Button>
+        </div>
       </div>
 
       {/* Error */}
@@ -159,7 +183,7 @@ export function ConnectionList() {
 
       {/* Connection Cards */}
       <div className="space-y-3">
-        {connections.map((conn) => {
+        {filteredConnections.map((conn) => {
           const testResult = testResults[conn.id];
           const isTesting = testingId === conn.id;
           const isDeleting = deletingId === conn.id;
